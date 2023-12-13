@@ -32,6 +32,6 @@
   transition: all 0.3s;
 }
 
-.accordion__icon.active {
+.accordion__btn.active .accordion__icon {
   transform: rotate(180deg);
 }

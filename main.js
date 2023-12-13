@@ -1,14 +1,12 @@
 class Accordion {
-
-  accordion
-  btnAll
-  panelAll
-  iconAll
-  setting = {}
+  accordion;
+  btnAll;
+  panelAll;
+  setting = {};
 
   constructor(accordion, setting) {
     this.accordion = document.querySelector(accordion);
-    this.setting = setting
+    this.setting = setting;
     this.#getElements();
     this.#click();
     this.#showPanel();
@@ -17,20 +15,15 @@ class Accordion {
   #getElements() {
     this.#getBtn();
     this.#getPanel();
-    if (this.setting.icon) {
-      this.#getIcon();
-    }
   }
 
   #getBtn() {
-    return this.btnAll = this.accordion.querySelectorAll('.accordion__btn'); //получить все кнопки
+    return this.btnAll = this.accordion.querySelectorAll(this.setting.btn); //получить все кнопки
   }
   #getPanel() {
-    return this.panelAll = this.accordion.querySelectorAll('.accordion__panel'); // получить все панели
+    return this.panelAll = this.accordion.querySelectorAll(this.setting.panel); // получить все панели
   }
-  #getIcon() {
-    return this.iconAll = this.accordion.querySelectorAll(this.setting.icon); // получить все иконки 
-  }
+
 
   #click() {
     this.btnAll.forEach((el, id) => {
@@ -39,23 +32,22 @@ class Accordion {
         if (this.setting.onlyOnePanel === true) {
           if (this.panelAll[id].style.maxHeight) {
             this.panelAll[id].style.maxHeight = null;
-            this.iconAll ? this.iconAll[id].classList.remove('active') : '';
-            return
+            this.btnAll[id].classList.remove('active');
+            return;
           }
           this.panelAll.forEach((p, id) => {
             p.style.maxHeight = null;
-            this.iconAll ? this.iconAll[id].classList.remove('active') : '';
+            this.btnAll[id].classList.remove('active');
           });
-
           this.panelAll[id].style.maxHeight = this.panelAll[id].scrollHeight + "px";
-          this.iconAll ? this.iconAll[id].classList.add('active') : '';
+          this.btnAll[id].classList.add('active');
         } else {
           if (this.panelAll[id].style.maxHeight) {
             this.panelAll[id].style.maxHeight = null;
-            this.iconAll ? this.iconAll[id].classList.remove('active') : '';
+            this.btnAll[id].classList.remove('active');
           } else {
             this.panelAll[id].style.maxHeight = this.panelAll[id].scrollHeight + "px";
-            this.iconAll ? this.iconAll[id].classList.add('active') : '';
+            this.btnAll[id].classList.add('active');
           }
         }
       })
@@ -69,7 +61,7 @@ class Accordion {
       this.panelAll.forEach((p, id) => {
         if (counter === id) {
           p.style.maxHeight = this.panelAll[id].scrollHeight + "px";
-          this.iconAll ? this.iconAll[id].classList.add('active') : '';
+          this.btnAll[id].classList.add('active');
         }
       });
     }
@@ -78,14 +70,9 @@ class Accordion {
 
 
 
-
-
-
-
-
 new Accordion('.accordion', {
+  panel: '.accordion__panel',
+  btn: '.accordion__btn',
   onlyOnePanel: true,        // открывать только одну
-  showPanel: 0,               // выбираем открытую панель
-  icon: '.accordion__icon',   // получаем icon
-});
-
+  showPanel: 1,               // выбираем открытую панель
+})
