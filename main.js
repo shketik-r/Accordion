@@ -1,11 +1,9 @@
 class Accordion {
-  accordion;
-  btnAll;
-  panelAll;
-  setting = {};
+
 
   constructor(accordion, setting) {
-    this.accordion = document.querySelector(accordion);
+
+    this.accordion = typeof accordion === "string" ? document.querySelector(accordion) : accordion;
     this.setting = setting;
     this.#getElements();
     this.#click();
@@ -18,10 +16,10 @@ class Accordion {
   }
 
   #getBtn() {
-    return this.btnAll = this.accordion.querySelectorAll(this.setting.btn); //получить все кнопки
+    return this.btnAll = typeof this.setting.btn === "string" ? this.accordion.querySelectorAll(this.setting.btn) : this.setting.btn;  //получить все кнопки
   }
   #getPanel() {
-    return this.panelAll = this.accordion.querySelectorAll(this.setting.panel); // получить все панели
+    return this.panelAll = typeof this.setting.panel === "string" ? this.accordion.querySelectorAll(this.setting.panel) : this.setting.panel; // получить все панели
   }
 
 
