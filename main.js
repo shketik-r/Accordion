@@ -1,6 +1,4 @@
 class Accordion {
-
-
   constructor(accordion, setting) {
 
     this.accordion = typeof accordion === "string" ? document.querySelector(accordion) : accordion;
@@ -21,7 +19,6 @@ class Accordion {
   #getPanel() {
     return this.panelAll = typeof this.setting.panel === "string" ? this.accordion.querySelectorAll(this.setting.panel) : this.setting.panel; // получить все панели
   }
-
 
   #click() {
     this.btnAll.forEach((el, id) => {
